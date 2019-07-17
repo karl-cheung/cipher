@@ -1,0 +1,24 @@
+<script src="../public/crypto-js.min.js"></script>
+<!-- Mode is introduced when the ECB is in. -->
+<script src="../public/mode-ecb.min.js"></script>
+<script src="../dist/tdes.min.js"></script>
+<script>
+var message = 'https://github.com/vincheung'
+var key = 'vincheng'
+
+var ciphertext = tdes.encryptDes(message, key)
+var plaintext = tdes.decryptDes(ciphertext, key)
+console.log('\x1B[31m%s\x1B[0m', ciphertext)
+console.log('\x1B[35m%s\x1B[0m', plaintext)
+
+var ciphertext2 = tdes.encryptTripleDes(message, key, {
+  mode: 'CBC',
+  iv: 123
+})
+var plaintext2 = tdes.decryptTripleDes(ciphertext2, key, {
+  mode: 'CBC',
+  iv: 123
+})
+console.log('\x1B[36m%s\x1B[0m', ciphertext2)
+console.log('\x1B[34m%s\x1B[0m', plaintext2)
+</script>
