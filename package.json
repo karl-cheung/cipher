@@ -1,7 +1,7 @@
 {
   "name": "tdes",
-  "version": "1.0.1",
-  "description": "三重数据加密算法（Triple DES）的简易封装。",
+  "version": "1.0.2",
+  "description": "DES 加密算法与三重数据加密算法（Triple DES）的简易封装。",
   "main": "dist/tdes.min.js",
   "scripts": {
     "build": "node scripts/build.js",
@@ -12,13 +12,10 @@
     "url": "git+https://github.com/vincheung/tdes.git"
   },
   "keywords": [
+    "des",
     "tdes",
-    "Triple Data Encryption Algorithm",
-    "Triple DES",
-    "TDES",
-    "3DES",
-    "Triple DEA",
-    "TDEA"
+    "DES",
+    "Triple DES"
   ],
   "author": "Zhang Yu",
   "license": "MIT",

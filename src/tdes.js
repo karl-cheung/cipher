@@ -1,5 +1,7 @@
 import CryptoJS from 'crypto-js'
 
+const Utf8 = CryptoJS.enc.Utf8
+
 function init(data, key, config) {
   const keyHex = CryptoJS.enc.Utf8.parse(key)
   const defaultConfig = {
@@ -16,27 +18,27 @@ function init(data, key, config) {
   return [data, keyHex, defaultConfig]
 }
 
-function encryptDes(data, key, config = {}) {
+function desEncrypt(data, key, config = {}) {
   return CryptoJS.DES.encrypt(...init(data, key, config)).toString()
 }
 
-function decryptDes(data, key, config = {}) {
-  return CryptoJS.DES.decrypt(...init(data, key, config)).toString(CryptoJS.enc.Utf8)
+function desDecrypt(data, key, config = {}) {
+  return CryptoJS.DES.decrypt(...init(data, key, config)).toString(Utf8)
 }
 
-function encryptTripleDes(data, key, config = {}) {
+function tdesEncrypt(data, key, config = {}) {
   return CryptoJS.TripleDES.encrypt(...init(data, key, config)).toString()
 }
 
-function decryptTripleDes(data, key, config = {}) {
-  return CryptoJS.TripleDES.decrypt(...init(data, key, config)).toString(CryptoJS.enc.Utf8)
+function tdesDecrypt(data, key, config = {}) {
+  return CryptoJS.TripleDES.decrypt(...init(data, key, config)).toString(Utf8)
 }
 
 const tdes = {
-  encryptDes,
-  decryptDes,
-  encryptTripleDes,
-  decryptTripleDes,
+  desEncrypt,
+  desDecrypt,
+  tdesEncrypt,
+  tdesDecrypt,
 }
 
 export default tdes
