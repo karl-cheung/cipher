@@ -6,16 +6,16 @@
 var message = 'https://github.com/vincheung'
 var key = 'vincheng'
 
-var ciphertext = tdes.encryptDes(message, key)
-var plaintext = tdes.decryptDes(ciphertext, key)
+var ciphertext = tdes.desEncrypt(message, key)
+var plaintext = tdes.desDecrypt(ciphertext, key)
 console.log('\x1B[31m%s\x1B[0m', ciphertext)
 console.log('\x1B[35m%s\x1B[0m', plaintext)
 
-var ciphertext2 = tdes.encryptTripleDes(message, key, {
+var ciphertext2 = tdes.tdesEncrypt(message, key, {
   mode: 'CBC',
   iv: 123
 })
-var plaintext2 = tdes.decryptTripleDes(ciphertext2, key, {
+var plaintext2 = tdes.tdesDecrypt(ciphertext2, key, {
   mode: 'CBC',
   iv: 123
 })
