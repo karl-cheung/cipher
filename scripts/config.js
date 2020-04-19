@@ -23,35 +23,35 @@ const resolve = (p) => {
 }
 
 const config = {
-  entry: resolve('src/cipher-js.js'),
+  entry: resolve('src/cipher.js'),
   env: 'production',
   banner,
   external: Object.keys(require('../package.json').dependencies),
   globals: {
     'crypto-js': 'CryptoJS',
-    'cipher-js': 'CipherJs',
+    'cipher': 'Cipher',
   },
 }
 
 const builds = {
-  'cipher-js': {
+  'cipher': {
     ...config,
-    dest: resolve('dist/cipher-js.min.js'),
+    dest: resolve('dist/cipher.min.js'),
     format: 'umd',
   },
-  'cipher-js-cjs': {
+  'cipher-cjs': {
     ...config,
-    dest: resolve('dist/cipher-js.cjs.min.js'),
+    dest: resolve('dist/cipher.cjs.min.js'),
     format: 'cjs',
   },
-  'cipher-js-amd': {
+  'cipher-amd': {
     ...config,
-    dest: resolve('dist/cipher-js.amd.min.js'),
+    dest: resolve('dist/cipher.amd.min.js'),
     format: 'amd',
   },
-  'cipher-js-es': {
+  'cipher-es': {
     ...config,
-    dest: resolve('dist/cipher-js.es.min.js'),
+    dest: resolve('dist/cipher.es.min.js'),
     format: 'es',
   },
 }

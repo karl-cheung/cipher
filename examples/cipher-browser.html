@@ -1,26 +1,26 @@
 <script src="../public/crypto-js.js"></script>
-<script src="../dist/cipher-js.min.js"></script>
+<script src="../dist/cipher.min.js"></script>
 <script>
-  var message = 'https://github.com/vincheung/cipher-js'
-  var key = 'cipher-js'
+  var message = 'https://github.com/vincheung/cipher'
+  var key = 'cipher'
 
   // DES
-  var cipherDES = CipherJs.encrypt(message, key, {
+  var cipherDES = Cipher.encrypt(message, key, {
     cipher: 'DES',
   })
-  var plainDES = CipherJs.decrypt(cipherDES, key, {
+  var plainDES = Cipher.decrypt(cipherDES, key, {
     cipher: 'DES',
   })
   console.log('\x1B[31m%s\x1B[0m', cipherDES)
   console.log(plainDES)
 
   // TripleDES
-  var cipherTripleDES = CipherJs.encrypt(message, key, {
+  var cipherTripleDES = Cipher.encrypt(message, key, {
     cipher: 'TripleDES',
     mode: 'CBC',
     padding: 'ZeroPadding',
   })
-  var plainTripleDES = CipherJs.decrypt(cipherTripleDES, key, {
+  var plainTripleDES = Cipher.decrypt(cipherTripleDES, key, {
     cipher: 'TripleDES',
     mode: 'CBC',
     padding: 'ZeroPadding',
@@ -29,10 +29,10 @@
   console.log(plainTripleDES)
 
   // AES
-  var cipherAES = CipherJs.encrypt(message, key, {
+  var cipherAES = Cipher.encrypt(message, key, {
     cipher: 'AES',
   })
-  var plainAES = CipherJs.decrypt(cipherAES, key, {
+  var plainAES = Cipher.decrypt(cipherAES, key, {
     cipher: 'AES',
   })
   console.log('\x1B[33m%s\x1B[0m', cipherAES)
