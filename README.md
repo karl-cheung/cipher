@@ -63,7 +63,7 @@ Import:
 ## 示例
 
 ```js
-import Cipher from 'cipher'
+import Cipher from '@vincheung/cipher'
 
 const message = 'https://github.com/vincheung/cipher'
 const key = 'cipher'
@@ -105,7 +105,7 @@ console.log(plainAES)
 
 ```js
 // 假设密钥 key 的处理使用
-import Cipher from 'cipher'
+import Cipher from '@vincheung/cipher'
 
 const { CryptoJS } = Cipher
 
