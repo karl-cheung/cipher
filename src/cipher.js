@@ -27,10 +27,10 @@ function decrypt(data, key, config = { compile: true }) {
   return !compile ? bytes.toString() : bytes.toString(Utf8)
 }
 
-const CipherJs = {
+const Cipher = {
   CryptoJS,
   encrypt,
   decrypt,
 }
 
-export default CipherJs
+export default Cipher

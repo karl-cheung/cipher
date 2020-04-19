@@ -1,18 +1,18 @@
 {
-  "name": "cipher-js",
+  "name": "@vincheung/cipher",
   "version": "1.0.0",
   "description": "JavaScript 加密库 crypto-js 的封装。",
-  "main": "dist/cipher-js.min.js",
+  "main": "dist/cipher.min.js",
   "scripts": {
     "build": "node scripts/build.js",
-    "test:node": "node examples/cipher-js-cjs.js"
+    "test:node": "node examples/cipher-cjs.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vincheung/cipher-js.git"
+    "url": "git+https://github.com/vincheung/cipher.git"
   },
   "keywords": [
-    "cipher-js",
+    "cipher",
     "DES",
     "Triple DES",
     "AES",
@@ -21,9 +21,9 @@
   "author": "Zhang Yu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vincheung/cipher-js/issues"
+    "url": "https://github.com/vincheung/cipher/issues"
   },
-  "homepage": "https://github.com/vincheung/cipher-js#readme",
+  "homepage": "https://github.com/vincheung/cipher#readme",
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
