@@ -1,28 +1,29 @@
 {
-  "name": "tdes",
-  "version": "1.0.2",
-  "description": "DES 加密算法与三重数据加密算法（Triple DES）的简易封装。",
-  "main": "dist/tdes.min.js",
+  "name": "cipher-js",
+  "version": "1.0.0",
+  "description": "JavaScript 加密库 crypto-js 的封装。",
+  "main": "dist/cipher-js.min.js",
   "scripts": {
     "build": "node scripts/build.js",
-    "test:node": "node examples/tdes-cjs.js"
+    "test:node": "node examples/cipher-js-cjs.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vincheung/tdes.git"
+    "url": "git+https://github.com/vincheung/cipher-js.git"
   },
   "keywords": [
-    "des",
-    "tdes",
+    "cipher-js",
     "DES",
-    "Triple DES"
+    "Triple DES",
+    "AES",
+    "crypto-js"
   ],
   "author": "Zhang Yu",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vincheung/tdes/issues"
+    "url": "https://github.com/vincheung/cipher-js/issues"
   },
-  "homepage": "https://github.com/vincheung/tdes#readme",
+  "homepage": "https://github.com/vincheung/cipher-js#readme",
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",

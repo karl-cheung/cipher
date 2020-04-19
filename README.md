@@ -1,92 +1,124 @@
-# tdes
+# cipher-js
 
-> DES 加密算法与三重数据加密算法（Triple DES）的简易封装。
-
-## 说明
-
-- DES 加密算法
-
-  DES 全称为 Data Encryption Standard，即数据加密标准，是一种使用密钥加密的块算法
-
-- 三重数据加密算法
-
-  三重数据加密算法（Triple Data Encryption Algorithm，缩写为 TDEA，Triple DEA），或称 3DES（Triple DES），是一种对称密钥加密块密码，相当于是对每个数据块应用三次资料加密标准（DES）算法
+> JavaScript 加密库 [crypto-js] 的封装。
 
 ## 使用
 
 Install:
 
 ```shell
-npm install tdes -S
+npm install cipher-js -S
 ```
 
 Import:
 
-```shell
-<script src="../dist/tdes.min.js"></script>
+```html
+<script src="../dist/cipher-js.min.js"></script>
 ```
 
 ## API
 
-> tdes.js 的默认模式为 ECB，默认填充方式为 PKCS7
+- `cipher-js` 依赖 `crypto-js` 实现，暴露全局对象 CipherJs
 
-- des
+- `cipher-js` 的默认加密模式为 ECB，填充方式为 PKCS7
 
-  - desEncrypt
+- CipherJs 暴露加密方法 encrypt，解密方法 decrypt
 
-  - desDecrypt
+- encrypt：入参
+
+  - data：明文
+
+  - key：密钥
+
+  - {}：配置
+
+    - cipher：算法的名称
+
+    - mode：模式
+
+    - padding：填充
+
+    - iv：向量
+
+- decrypt：入参
+
+  - data：密文
+
+  - key：密钥
+
+  - {}：配置
+
+    - cipher：算法的名称
+
+    - mode：模式
+
+    - padding：填充
+
+    - iv：向量
+
+    - compile：CryptoJS.enc.Utf8 转译，默认值 `true`（解密结果默认会使用 CryptoJS.enc.Utf8 转译，你可以使用 compile: false 来关闭转译）
+
+- CipherJs 对象下的 CryptoJS 属性对象完整继承来源于 `crypto-js`，你仍可以通过 CipherJs.CryptoJS 来使用 `crypto-js` 的所有功能
+
+## 示例
 
 ```js
-const tdes = require('../dist/tdes.min.js')
-const message = 'https://github.com/vincheung'
-const key = 'vincheng'
+import CipherJs from 'cipher-js'
 
-const ciphertext = tdes.desEncrypt(message, key)
-const plaintext = tdes.desDecrypt(ciphertext, key)
-console.log('\x1B[31m%s\x1B[0m', ciphertext)
-console.log('\x1B[35m%s\x1B[0m', plaintext)
+const message = 'https://github.com/vincheung/cipher-js'
+const key = 'cipher-js'
 
-const ciphertext2 = tdes.desEncrypt(message, key, {
-  mode: 'CBC',
-  iv: 123
+// DES
+const cipherDES = CipherJs.encrypt(message, key, {
+  cipher: 'DES',
 })
-const plaintext2 = tdes.desDecrypt(ciphertext2, key, {
-  mode: 'CBC',
-  iv: 123
+const plainDES = CipherJs.decrypt(cipherDES, key, {
+  cipher: 'DES',
 })
-console.log('\x1B[36m%s\x1B[0m', ciphertext2)
-console.log('\x1B[34m%s\x1B[0m', plaintext2)
+console.log(cipherDES)
+console.log(plainDES)
+
+// TripleDES
+const cipherTripleDES = CipherJs.encrypt(message, key, {
+  cipher: 'TripleDES',
+  mode: 'CBC',
+  padding: 'ZeroPadding',
+})
+const plainTripleDES = CipherJs.decrypt(cipherTripleDES, key, {
+  cipher: 'TripleDES',
+  mode: 'CBC',
+  padding: 'ZeroPadding',
+})
+console.log(cipherTripleDES)
+console.log(plainTripleDES)
+
+// AES
+const cipherAES = CipherJs.encrypt(message, key, {
+  cipher: 'AES',
+})
+const plainAES = CipherJs.decrypt(cipherAES, key, {
+  cipher: 'AES',
+})
+console.log(cipherAES)
+console.log(plainAES)
 ```
-
-- tdes
-
-  - tdesEncrypt
-
-  - tdesDecrypt
 
 ```js
-const tdes = require('../dist/tdes.min.js')
-const message = 'https://github.com/vincheung'
-const key = 'vincheng'
+// 假设密钥 key 的处理使用
+import CipherJs from 'cipher-js'
 
-const ciphertext = tdes.tdesEncrypt(message, key)
-const plaintext = tdes.tdesDecrypt(ciphertext, key)
-console.log('\x1B[31m%s\x1B[0m', ciphertext)
-console.log('\x1B[35m%s\x1B[0m', plaintext)
+const { CryptoJS } = CipherJs
 
-const ciphertext2 = tdes.tdesEncrypt(message, key, {
-  mode: 'CBC',
-  iv: 123
+const message = 'https://github.com/vincheung/cipher-js'
+const key = 'cipher-js'
+
+const keyHex = CryptoJS.enc.Utf8.parse(key)
+const cipherDES = CipherJs.encrypt(message, keyHex, {
+  cipher: 'DES',
 })
-const plaintext2 = tdes.tdesDecrypt(ciphertext2, key, {
-  mode: 'CBC',
-  iv: 123
-})
-console.log('\x1B[36m%s\x1B[0m', ciphertext2)
-console.log('\x1B[34m%s\x1B[0m', plaintext2)
 ```
 
-## 附注
+## 拓展
 
 - CBC 需要初始化向量 iv，来加密第一块 C0
 
@@ -96,12 +128,20 @@ console.log('\x1B[34m%s\x1B[0m', plaintext2)
 
 - 在不填充的情况下，加密内容不是 8bit 整数倍加密会报错
 
-- Java 的默认模式为 ECB，key 的 size 必须为 24。默认填充方式为 PKCS5，没有 PKCS7
+- Java 的默认模式为 ECB，key 的 size 必须为 24默认填充方式为 PKCS5，没有 PKCS7
 
 - C# 的默认模式为 CBC，默认填充方式为 PKCS7
 
-- JavaScript 填充方式 PKCS7 对应 Java 填充方式 PKCS5
+- JavaScript 填充方式 PKCS7 对应 Java 填充方式 PKCS5，没有 PKCS5
+
+## 兼容
+
+`cipher-js` 使用广泛支持的 ES6 Object.assign，如果你的环境较为老旧，可以使用垫片 polyfill。
 
 ## License
 
-The MIT License.
+The [MIT License].
+
+[crypto-js]: https://github.com/brix/crypto-js
+
+[mit license]: ./LICENSE
