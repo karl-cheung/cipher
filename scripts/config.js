@@ -3,7 +3,7 @@ const buble = require('rollup-plugin-buble')
 const alias = require('rollup-plugin-alias')
 const replace = require('rollup-plugin-replace')
 const flow = require('rollup-plugin-flow-no-whitespace')
-const { name, author, } = require('../package.json')
+const { name, author } = require('../package.json')
 const version = process.env.VERSION || require('../package.json').version
 const aliases = require('./alias')
 const banner =
@@ -13,7 +13,7 @@ const banner =
   ' * Released under the MIT License.\n' +
   ' */'
 
-const resolve = p => {
+const resolve = (p) => {
   const base = p.split('/')[0]
   if (aliases[base]) {
     return path.resolve(aliases[base], p.slice(base.length + 1))
@@ -23,47 +23,47 @@ const resolve = p => {
 }
 
 const config = {
-  entry: resolve('src/tdes.js'),
+  entry: resolve('src/cipher-js.js'),
   env: 'production',
   banner,
   external: Object.keys(require('../package.json').dependencies),
   globals: {
     'crypto-js': 'CryptoJS',
+    'cipher-js': 'CipherJs',
   },
 }
 
 const builds = {
-  'tdes': {
+  'cipher-js': {
     ...config,
-    dest: resolve('dist/tdes.min.js'),
+    dest: resolve('dist/cipher-js.min.js'),
     format: 'umd',
   },
-  'tdes-cjs': {
+  'cipher-js-cjs': {
     ...config,
-    dest: resolve('dist/tdes.cjs.min.js'),
+    dest: resolve('dist/cipher-js.cjs.min.js'),
     format: 'cjs',
   },
-  'tdes-amd': {
+  'cipher-js-amd': {
     ...config,
-    dest: resolve('dist/tdes.amd.min.js'),
+    dest: resolve('dist/cipher-js.amd.min.js'),
     format: 'amd',
   },
-  'tdes-es': {
+  'cipher-js-es': {
     ...config,
-    dest: resolve('dist/tdes.es.min.js'),
+    dest: resolve('dist/cipher-js.es.min.js'),
     format: 'es',
   },
 }
 
-function genConfig (key) {
+function genConfig(key) {
   const opts = builds[key]
   const config = {
     input: opts.entry,
     external: opts.external,
-    plugins: [
-      flow(),
-      alias(Object.assign({}, aliases, opts.alias))
-    ].concat(opts.plugins || []),
+    plugins: [flow(), alias(Object.assign({}, aliases, opts.alias))].concat(
+      opts.plugins || []
+    ),
     output: {
       file: opts.dest,
       format: opts.format,
@@ -75,14 +75,14 @@ function genConfig (key) {
       if (!/Circular/.test(msg)) {
         warn(msg)
       }
-    }
+    },
   }
 
   // built-in vars
   const vars = {
     __VERSION__: version,
   }
-  
+
   // build-specific env
   if (opts.env) {
     vars['process.env.NODE_ENV'] = JSON.stringify(opts.env)
